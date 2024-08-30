@@ -11,6 +11,10 @@ labels:
   "review needed":
     include:
       - ""
+    exclude:
+      - "to master"
+      - "to pre-production"
+      - "to production"
   "bugfix":
     include:
       - "fix"
