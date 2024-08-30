@@ -29,7 +29,5 @@ labels:
       - "docs"
   "refactor":
     include:
-      - "refactor"
-  "chore":
     include:
       - "chore"
