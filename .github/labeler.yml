@@ -13,19 +13,19 @@ labels:
       - ""
   "bugfix":
     include:
-      - '\bfix\b'
+      - "fix"
   "test":
     include:
-      - '\btest\b'
+      - "test"
   "feature":
     include:
-      - '\bfeat\b'
+      - "feat"
   "documentation":
     include:
-      - '\bdocs\b'
+      - "docs"
   "refactor":
     include:
-      - '\brefactor\b'
+      - "refactor"
   "chore":
     include:
-      - '\bchore\b'
+      - "chore"
