@@ -11,5 +11,5 @@ jobs:
       - name: Apply 'review needed' label
         uses: actions-ecosystem/action-add-labels@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT_FOR_AUTOMATION }}
           labels: review needed
