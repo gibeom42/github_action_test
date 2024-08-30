@@ -10,9 +10,9 @@ comments:
 labels:
   "review needed":
     exclude:
-      - '\b\master\b'
-      - '\b\pre-production\b'
-      - '\b\prouction\b'
+      - '\bmaster\b'
+      - '\bpre-production\b'
+      - '\bprouction\b'
   "bugfix":
     include:
       - '\bfix\b'
