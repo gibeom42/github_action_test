@@ -11,10 +11,6 @@ labels:
   "review needed":
     include:
       - ""
-    exclude:
-      - '\bmaster\b'
-      - '\bpre-production\b'
-      - '\bprouction\b'
   "bugfix":
     include:
       - '\bfix\b'
