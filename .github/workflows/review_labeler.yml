@@ -1,0 +1,32 @@
+name: review labeler
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up GitHub CLI
+        uses: actions/setup-gh@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add or remove labels based on review
+        run: |
+          REVIEW_STATE="${{ github.event.review.state }}"
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          APPROVALS=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "APPROVED")) | length')
+          REQUEST_CHANGES=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "CHANGES_REQUESTED")) | length')
+
+          if [[ "$REVIEW_STATE" == "commented" || "$REVIEW_STATE" == "changes_requested" ]]; then
+            gh pr edit $PR_NUMBER --add-label "answer needed"
+          fi
+
+          if [[ "$APPROVALS" -ge 1 && "$REQUEST_CHANGES" -eq 0 ]]; then
+            gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
+          fi
