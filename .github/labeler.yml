@@ -28,6 +28,6 @@ labels:
   "refactor":
     include:
       - '\brefactor\b'
-  "chore":
+  "chore":asdf
     include:
       - '\bchore\b'
