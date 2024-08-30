@@ -18,8 +18,8 @@ jobs:
         run: |
           REVIEW_STATE="${{ github.event.review.state }}"
           PR_NUMBER="${{ github.event.pull_request.number }}"
-          APPROVALS=$(gh pr view $PR_NUMBER --json reviews --state open --jq '.reviews | map(select(.state == "APPROVED")) | length')
-          REQUEST_CHANGES=$(gh pr view $PR_NUMBER --json reviews --state open --jq '.reviews | map(select(.state == "CHANGES_REQUESTED")) | length')
+          APPROVALS=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "APPROVED")) | length')
+          REQUEST_CHANGES=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "CHANGES_REQUESTED")) | length')
 
             echo "Review State: $REVIEW_STATE"
             echo "PR Number: $PR_NUMBER"
