@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Apply 'review needed' label
-        uses: actions-ecosystem/action-add-labels@v1
+        uses: actions-ecosystem/action-add-labels@v1.1.0
         with:
           github_token: ${{ secrets.PAT_FOR_AUTOMATION }}
           labels: review needed
