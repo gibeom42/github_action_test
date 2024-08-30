@@ -1,0 +1,29 @@
+enable:
+  issues: false
+  prs: true
+
+comments:
+  prs: |
+    Labeler has applied any labels matching special text in your title and description.
+    Please review the labels and make any necessary changes.
+
+labels:
+  "review needed":
+    include:
+      - ""
+  "bugfix":
+    include:
+      - "fix"
+  "test":
+    include:
+      - "test"
+  "feature":
+    include:
+      - "feat"
+  "documentation":
+    include:
+      - "docs"
+  "refactor":
+    include:
+    include:
+      - "chore"

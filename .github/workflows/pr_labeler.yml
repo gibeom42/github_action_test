@@ -1,0 +1,38 @@
+name: PR labeler
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      # remove labels
+      - name: Remove Labels
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.PAT_FOR_AUTOMATION}}
+          script: |
+            const issue_number = context.issue.number;
+            const current_labels = await github.issues.listLabelsOnIssue({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number
+            });
+            for (const label of current_labels.data) {
+              await github.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue_number,
+                name: label.name
+              });
+            }
+      - name: Check Labels
+        id: labeler
+        uses: jimschubert/labeler-action@v1
+        with:
+          GITHUB_TOKEN: ${{secrets.PAT_FOR_AUTOMATION}}
