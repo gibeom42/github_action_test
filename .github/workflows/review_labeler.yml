@@ -21,12 +21,19 @@ jobs:
           APPROVALS=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "APPROVED")) | length')
           REQUEST_CHANGES=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "CHANGES_REQUESTED")) | length')
 
-          if [[ "$REVIEW_STATE" == "commented" || "$REVIEW_STATE" == "changes_requested" ]]; then
+          if [[ "$REVIEW_STATE" == "commented" ]]; then
             gh pr edit $PR_NUMBER --add-label "answer needed"
           fi
 
-          if [[ "$APPROVALS" -ge 1 && "$REQUEST_CHANGES" -eq 0 ]]; then
-            gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
+          if [[ "$REVIEW_STATE" == "changes_requested" ]]; then
+            gh pr edit $PR_NUMBER --add-label "answer needed" --remove-label "merge needed"
           fi
+
+          if [[ "$REVIEW_STATE" == "approved" ]]; then
+            if [[ "$APPROVALS" -ge 1 && "$REQUEST_CHANGES" -eq 0 ]]; then
+              gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
+            fi
+          fi
+
         env:
           GH_TOKEN: ${{ secrets.PAT_FOR_AUTOMATION }}
