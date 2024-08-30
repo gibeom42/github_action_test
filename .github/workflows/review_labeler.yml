@@ -29,10 +29,8 @@ jobs:
             gh pr edit $PR_NUMBER --add-label "answer needed" --remove-label "merge needed"
           fi
 
-          if [[ "$REVIEW_STATE" == "approved" ]]; then
-            if [[ "$APPROVALS" -ge 1 && "$REQUEST_CHANGES" -eq 0 ]]; then
-              gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
-            fi
+          if [[ "$APPROVALS" -ge 1 && "$REQUEST_CHANGES" -eq 0 ]]; then
+            gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
           fi
 
         env:
