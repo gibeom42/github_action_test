@@ -38,6 +38,9 @@ jobs:
             gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
           fi
 
+        env:
+          GH_TOKEN: ${{ secrets.PAT_FOR_AUTOMATION }}
+
       - name: Remove "answer needed" label if all conversations are resolved
         run: |
           PR_NUMBER="${{ github.event.pull_request.number }}"
