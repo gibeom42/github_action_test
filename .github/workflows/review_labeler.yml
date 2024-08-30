@@ -38,5 +38,19 @@ jobs:
             gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
           fi
 
+      - name: Remove "answer needed" label if all conversations are resolved
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          RESOLVED_CONVERSATIONS=$(gh pr view $PR_NUMBER --json comments --jq '.comments | map(select(.isResolved == true)) | length')
+          TOTAL_CONVERSATIONS=$(gh pr view $PR_NUMBER --json comments --jq '.comments | length')
+
+          echo "Resolved Conversations: $RESOLVED_CONVERSATIONS"
+          echo "Total Conversations: $TOTAL_CONVERSATIONS"
+
+          if [[ "$RESOLVED_CONVERSATIONS" -eq "$TOTAL_CONVERSATIONS" && "$TOTAL_CONVERSATIONS" -gt 0 ]]; then
+            echo "All conversations are resolved. Removing 'answer needed' label."
+            gh pr edit $PR_NUMBER --remove-label "answer needed"
+          fi
+
         env:
           GH_TOKEN: ${{ secrets.PAT_FOR_AUTOMATION }}
