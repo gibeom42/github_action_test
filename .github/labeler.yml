@@ -2,11 +2,6 @@ enable:
   issues: false
   prs: true
 
-comments:
-  prs: |
-    Labeler has applied any labels matching special text in your title and description.
-    Please review the labels and make any necessary changes.
-
 labels:
   "review needed":
     include:
@@ -18,18 +13,24 @@ labels:
   "bugfix":
     include:
       - "fix"
+      - "Fix"
   "test":
     include:
       - "test"
+      - "Test"
   "feature":
     include:
       - "feat"
+      - "Feat"
   "documentation":
     include:
       - "docs"
+      - "Docs"
   "refactor":
     include:
       - "refactor"
+      - "Refactor"
   "chore":
     include:
       - "chore"
+      - "Chore"
