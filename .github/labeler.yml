@@ -9,6 +9,8 @@ comments:
 
 labels:
   "review needed":
+    include:
+      - ""
     exclude:
       - '\bmaster\b'
       - '\bpre-production\b'
