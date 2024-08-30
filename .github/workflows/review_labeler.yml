@@ -28,3 +28,5 @@ jobs:
           if [[ "$APPROVALS" -ge 1 && "$REQUEST_CHANGES" -eq 0 ]]; then
             gh pr edit $PR_NUMBER --remove-label "review needed" --add-label "merge needed"
           fi
+        env:
+          GH_TOKEN: ${{ secrets.PAT_FOR_AUTOMATION }}
