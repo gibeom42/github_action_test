@@ -9,25 +9,21 @@ comments:
 
 labels:
   "review needed":
-    exclude:
-      - '\bmaster\b'
-      - '\bpre-production\b'
-      - '\bprouction\b'
+    include:
+      - ""
   "bugfix":
     include:
-      - '\bfix\b'
+      - "fix"
   "test":
     include:
-      - '\btest\b'
+      - "test"
   "feature":
     include:
-      - '\bfeat\b'
+      - "feat"
   "documentation":
     include:
-      - '\bdocs\b'
+      - "docs"
   "refactor":
     include:
-      - '\brefactor\b'
-  "chore":asdf
     include:
-      - '\bchore\b'
+      - "chore"
