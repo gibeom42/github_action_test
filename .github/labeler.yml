@@ -11,7 +11,9 @@ labels:
   "review needed":
     include:
       - ""
-  "bug":
+    exclude:
+      - '\b\[to .*\]\b'
+  "bugfix":
     include:
       - '\bfix\b'
   "test":
