@@ -21,6 +21,11 @@ jobs:
           APPROVALS=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "APPROVED")) | length')
           REQUEST_CHANGES=$(gh pr view $PR_NUMBER --json reviews --jq '.reviews | map(select(.state == "CHANGES_REQUESTED")) | length')
 
+            echo "Review State: $REVIEW_STATE"
+            echo "PR Number: $PR_NUMBER"
+            echo "Approvals: $APPROVALS"
+            echo "Request Changes: $REQUEST_CHANGES"
+
           if [[ "$REVIEW_STATE" == "commented" ]]; then
             gh pr edit $PR_NUMBER --add-label "answer needed"
           fi
